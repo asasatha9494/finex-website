@@ -7,6 +7,7 @@ import Process from "@/components/Process";
 import Pricing from "@/components/Pricing";
 import About from "@/components/About";
 import FAQ from "@/components/FAQ";
+import HealthCheck from "@/components/HealthCheck";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
       <Pricing />
       <About />
       <FAQ />
+      <HealthCheck />
     </main>
   );
 }
