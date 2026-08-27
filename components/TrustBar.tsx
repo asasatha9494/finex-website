@@ -1,4 +1,9 @@
-import { Check, Cloud, LockKeyhole, Target } from "lucide-react";
+import {
+  Check,
+  Cloud,
+  LockKeyhole,
+  Target,
+} from "lucide-react";
 
 const trustItems = [
   {
