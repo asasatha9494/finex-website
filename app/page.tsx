@@ -4,6 +4,7 @@ import TrustBar from "@/components/TrustBar";
 import Services from "@/components/Services";
 import Industries from "@/components/Industries";
 import Process from "@/components/Process";
+import Pricing from "@/components/Pricing";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <Services />
       <Industries />
       <Process />
+      <Pricing />
     </main>
   );
 }
