@@ -7,6 +7,7 @@ export default function Home() {
     <main className="min-h-screen bg-[#eae7e0]">
       <Navbar />
       <Hero />
+      <TrustBar />
     </main>
   );
 }
