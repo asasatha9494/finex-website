@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import TrustBar from "@/components/TrustBar";
 import Services from "@/components/Services";
 import Industries from "@/components/Industries";
+import Process from "@/components/Process";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <TrustBar />
       <Services />
       <Industries />
+      <Process />
     </main>
   );
 }
