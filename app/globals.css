@@ -1,26 +1,173 @@
 @import "tailwindcss";
 
+/* =========================================================
+   FINEX DESIGN SYSTEM
+   Excellence · Trust · Impact
+   ========================================================= */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* FineX Brand Palette */
+  --background: #eae7e0;
+  --foreground: #1c1a17;
+
+  --ink: #1c1a17;
+  --orange: #ef7d24;
+  --soft-grey: #5c584f;
+  --white: #ffffff;
+
+  --border: #d3cfc3;
+  --orange-soft: #f6c299;
 }
 
+/* Tailwind theme variables */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --color-ink: var(--ink);
+  --color-orange: var(--orange);
+  --color-soft-grey: var(--soft-grey);
+  --color-white: var(--white);
+  --color-border: var(--border);
+  --color-orange-soft: var(--orange-soft);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* =========================================================
+   BASE
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
+  margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-work-sans), sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* =========================================================
+   SELECTION
+   ========================================================= */
+
+::selection {
+  background: var(--orange);
+  color: var(--white);
+}
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--soft-grey);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ink);
+}
+
+/* =========================================================
+   UTILITY CLASSES
+   ========================================================= */
+
+.finex-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.finex-eyebrow {
+  color: var(--orange);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.finex-section {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.finex-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+}
+
+.finex-orange {
+  color: var(--orange);
+}
+
+.finex-ink {
+  color: var(--ink);
+}
+
+.finex-muted {
+  color: var(--soft-grey);
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .finex-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .finex-section {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+}
+
+/* =========================================================
+   FINEX TYPOGRAPHY
+   ========================================================= */
+
+.finex-heading {
+  font-family: var(--font-cormorant), serif;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.finex-mono {
+  font-family: var(--font-plex-mono), monospace;
+}
+
+.finex-body {
+  font-family: var(--font-work-sans), sans-serif;
 }
