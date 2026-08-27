@@ -6,6 +6,7 @@ import Industries from "@/components/Industries";
 import Process from "@/components/Process";
 import Pricing from "@/components/Pricing";
 import About from "@/components/About";
+import FAQ from "@/components/FAQ";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <Process />
       <Pricing />
       <About />
+      <FAQ />
     </main>
   );
 }
