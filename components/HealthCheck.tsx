@@ -5,10 +5,54 @@ import { useState } from "react";
 
 export default function HealthCheck() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setSubmitted(true);
+
+    setLoading(true);
+    setError("");
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      company: formData.get("company"),
+      service: formData.get("service"),
+      message: formData.get("message"),
+    };
+
+    try {
+      const response = await fetch("/api/health-check", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || "Something went wrong.");
+      }
+
+      setSubmitted(true);
+      form.reset();
+    } catch (error) {
+      console.error("Form submission error:", error);
+
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -73,10 +117,8 @@ export default function HealthCheck() {
               </p>
             </div>
           ) : (
-            <form
-              onSubmit={handleSubmit}
-              className="space-y-6"
-            >
+            <form onSubmit={handleSubmit} className="space-y-6">
+
               <div className="grid gap-6 md:grid-cols-2">
 
                 <div>
@@ -137,10 +179,22 @@ export default function HealthCheck() {
                   <option value="" disabled>
                     Select a service
                   </option>
-                  <option value="bookkeeping">Bookkeeping</option>
-                  <option value="accounting">Accounting</option>
-                  <option value="both">Bookkeeping & Accounting</option>
-                  <option value="other">Other</option>
+
+                  <option value="bookkeeping">
+                    Bookkeeping
+                  </option>
+
+                  <option value="accounting">
+                    Accounting
+                  </option>
+
+                  <option value="both">
+                    Bookkeeping & Accounting
+                  </option>
+
+                  <option value="other">
+                    Other
+                  </option>
                 </select>
               </div>
 
@@ -158,17 +212,26 @@ export default function HealthCheck() {
                 />
               </div>
 
+              {error && (
+                <p className="text-sm text-red-600">
+                  {error}
+                </p>
+              )}
+
               <button
                 type="submit"
-                className="flex w-full items-center justify-center gap-2 rounded-full bg-[#ef7d24] px-6 py-4 font-[var(--font-work-sans)] text-sm font-semibold text-white transition-transform duration-300 hover:-translate-y-1"
+                disabled={loading}
+                className="flex w-full items-center justify-center gap-2 rounded-full bg-[#ef7d24] px-6 py-4 font-[var(--font-work-sans)] text-sm font-semibold text-white transition-transform duration-300 hover:-translate-y-1 disabled:cursor-not-allowed disabled:opacity-60"
               >
-                Request Books Health Check
-                <ArrowUpRight size={17} />
+                {loading ? "Sending..." : "Request Books Health Check"}
+
+                {!loading && <ArrowUpRight size={17} />}
               </button>
 
               <p className="finex-body text-center text-xs text-[#5c584f]">
                 Your information will be used to respond to your enquiry.
               </p>
+
             </form>
           )}
 
