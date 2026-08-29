@@ -8,6 +8,7 @@ import Pricing from "@/components/Pricing";
 import About from "@/components/About";
 import FAQ from "@/components/FAQ";
 import HealthCheck from "@/components/HealthCheck";
+import Clients from "@/components/Clients";
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
       <About />
       <FAQ />
       <HealthCheck />
+      <Clients />
     </main>
   );
 }
