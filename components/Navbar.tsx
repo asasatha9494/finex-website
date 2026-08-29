@@ -9,7 +9,7 @@ const navItems = [
   { name: "Process", href: "#process" },
   { name: "Pricing", href: "#pricing" },
   { name: "About", href: "#about" },
-  { name: "About", href: "#about" },
+  { name: "Blog", href: "/Blog" },
 ];
 
 export default function Navbar() {

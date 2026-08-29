@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { db } from "@/prisma/db";
 import AdminLogout from "@/components/AdminLogout";
 import AdminStatusSelect from "@/components/AdminStatusSelect";
+import Clients from "@/components/Clients";
 
 export default async function AdminPage() {
     const session = await auth();

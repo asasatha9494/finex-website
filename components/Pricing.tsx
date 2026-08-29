@@ -1,4 +1,4 @@
-import { ArrowUpRight, Check } from "lucide-react";
+import { ArrowUpRight, Check, LockKeyhole } from "lucide-react";
 
 const plans = [
   {
@@ -71,13 +71,7 @@ export default function Pricing() {
               {/* Header */}
               <div className="flex items-start justify-between">
                 <div>
-                  <p
-                    className={`finex-mono text-[10px] tracking-[0.18em] ${
-                      plan.featured
-                        ? "text-[#ef7d24]"
-                        : "text-[#ef7d24]"
-                    }`}
-                  >
+                  <p className="finex-mono text-[10px] tracking-[0.18em] text-[#ef7d24]">
                     PACKAGE {plan.number}
                   </p>
 
@@ -99,13 +93,28 @@ export default function Pricing() {
 
               {/* Price */}
               <div className="mt-12">
-                <div className="flex items-end gap-2">
-                  <span className="finex-heading text-5xl md:text-6xl">
-                    {plan.price}
-                  </span>
+                <div className="flex items-center gap-4">
+                  <div className="relative">
+                    <span
+                      className="finex-heading select-none text-5xl blur-[7px] md:text-6xl"
+                      aria-hidden="true"
+                    >
+                      {plan.price}
+                    </span>
+
+                    <div
+                      className={`absolute inset-0 flex items-center justify-center ${
+                        plan.featured
+                          ? "text-[#eae7e0]"
+                          : "text-[#1c1a17]"
+                      }`}
+                    >
+                      <LockKeyhole size={22} strokeWidth={1.8} />
+                    </div>
+                  </div>
 
                   <span
-                    className={`finex-body mb-2 text-sm ${
+                    className={`finex-body text-sm ${
                       plan.featured
                         ? "text-[#a9a49a]"
                         : "text-[#5c584f]"
@@ -123,6 +132,16 @@ export default function Pricing() {
                   }`}
                 >
                   {plan.description}
+                </p>
+
+                <p
+                  className={`mt-3 text-xs font-medium ${
+                    plan.featured
+                      ? "text-[#ef7d24]"
+                      : "text-[#ef7d24]"
+                  }`}
+                >
+                  Contact us for exact pricing
                 </p>
               </div>
 
