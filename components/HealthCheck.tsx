@@ -69,14 +69,14 @@ export default function HealthCheck() {
           </p>
 
           <h2 className="finex-heading mt-4 text-5xl leading-[0.95] md:text-7xl">
-            Let's get your
+            Let&apos;s get your
             <br />
             <span className="text-[#ef7d24]">books in order.</span>
           </h2>
 
           <p className="finex-body mt-7 max-w-md text-base leading-7 text-[#a9a49a]">
             Tell us a little about your business and what you need help with.
-            We'll use this information to understand your requirements.
+            We&apos;ll use this information to understand your requirements.
           </p>
 
           <div className="mt-10 space-y-4">
@@ -112,7 +112,7 @@ export default function HealthCheck() {
               </h3>
 
               <p className="finex-body mt-4 max-w-md text-sm leading-6 text-[#5c584f]">
-                Thank you for contacting FineX. We'll review your information
+                Thank you for contacting FineX. We&apos;ll review your information
                 and get back to you.
               </p>
             </div>

@@ -55,7 +55,7 @@ export default function FAQ() {
           <h2 className="finex-heading mt-4 text-5xl leading-[0.95] text-[#1c1a17] md:text-7xl">
             Questions?
             <br />
-            <span className="text-[#ef7d24]">We've got answers.</span>
+            <span className="text-[#ef7d24]">We&apos;ve got answers.</span>
           </h2>
         </div>
 

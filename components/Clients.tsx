@@ -179,7 +179,7 @@ export default function Clients() {
               className="animate-[fadeIn_0.6s_ease-in-out]"
             >
               <div className="text-3xl text-[#ef7d24]">
-                "
+                &quot;
               </div>
 
               <p className="finex-body mt-5 max-w-3xl text-xl leading-8 md:text-2xl">

@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import { db } from "@/prisma/db";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
@@ -15,12 +16,18 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
 
-    const name = typeof body.name === "string" ? body.name.trim() : "";
-    const email = typeof body.email === "string" ? body.email.trim() : "";
+    const name =
+      typeof body.name === "string" ? body.name.trim() : "";
+
+    const email =
+      typeof body.email === "string" ? body.email.trim() : "";
+
     const company =
       typeof body.company === "string" ? body.company.trim() : "";
+
     const service =
       typeof body.service === "string" ? body.service.trim() : "";
+
     const message =
       typeof body.message === "string" ? body.message.trim() : "";
 
@@ -101,14 +108,13 @@ export async function POST(request: Request) {
     }
 
     // Save enquiry to database
-    const healthCheck =
-      await db.orm.public.HealthCheckRequest.create({
-        name,
-        email,
-        company,
-        service,
-        message,
-      });
+    await db.orm.public.HealthCheckRequest.create({
+      name,
+      email,
+      company,
+      service,
+      message,
+    });
 
     // Send email notification
     const { error: emailError } = await resend.emails.send({
@@ -167,6 +173,93 @@ export async function POST(request: Request) {
     );
   }
 }
+
+
+// ========================================
+// ADMIN STATUS UPDATE
+// ========================================
+
+export async function PATCH(request: Request) {
+  try {
+    // Check admin authentication
+    const session = await auth();
+
+    if (!session?.user) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Unauthorized.",
+        },
+        { status: 401 }
+      );
+    }
+
+    const body = await request.json();
+
+    const id = Number(body.id);
+
+    const status =
+      typeof body.status === "string"
+        ? body.status.trim()
+        : "";
+
+    // Validate ID
+    if (!Number.isInteger(id) || id <= 0) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Invalid enquiry ID.",
+        },
+        { status: 400 }
+      );
+    }
+
+    // Allowed statuses
+    const allowedStatuses = [
+      "NEW",
+      "CONTACTED",
+      "IN_PROGRESS",
+      "COMPLETED",
+    ];
+
+    if (!allowedStatuses.includes(status)) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Invalid status.",
+        },
+        { status: 400 }
+      );
+    }
+
+    // Update enquiry
+    const updatedRequest =
+      await db.orm.public.HealthCheckRequest
+        .where({ id })
+        .update({ status });
+
+    return NextResponse.json({
+      success: true,
+      message: "Status updated successfully.",
+      data: updatedRequest,
+    });
+  } catch (error) {
+    console.error("Status update error:", error);
+
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Failed to update status.",
+      },
+      { status: 500 }
+    );
+  }
+}
+
+
+// ========================================
+// HTML ESCAPING
+// ========================================
 
 function escapeHtml(value: string) {
   return value

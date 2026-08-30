@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 
@@ -9,7 +10,7 @@ const navItems = [
   { name: "Process", href: "#process" },
   { name: "Pricing", href: "#pricing" },
   { name: "About", href: "#about" },
-  { name: "Blog", href: "/Blog" },
+  { name: "Blog", href: "/blog" },
 ];
 
 export default function Navbar() {
@@ -20,12 +21,12 @@ export default function Navbar() {
       <nav className="mx-auto mt-4 flex max-w-[1200px] items-center justify-between rounded-full border border-[#d3cfc3] bg-[#eae7e0]/95 px-5 py-3 backdrop-blur-md md:px-6">
 
         {/* FineX Logo */}
-        <a
+        <Link
           href="/"
           className="font-[var(--font-cormorant)] text-2xl font-semibold tracking-[-0.03em] text-[#1c1a17]"
         >
           FineX<span className="text-[#ef7d24]">.</span>
-        </a>
+        </Link>
 
         {/* Desktop Navigation */}
         <div className="hidden items-center gap-7 md:flex">

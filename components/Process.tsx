@@ -59,7 +59,7 @@ export default function Process() {
 
         {/* Steps */}
         <div className="mt-16 border-t border-[#1c1a17]">
-          {steps.map((step, index) => {
+          {steps.map((step) => {
             const Icon = step.icon;
 
             return (
