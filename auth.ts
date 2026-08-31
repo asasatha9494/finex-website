@@ -10,21 +10,41 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
 
       async authorize(credentials) {
-        const email = credentials?.email;
-        const password = credentials?.password;
+        const email =
+          typeof credentials?.email === "string"
+            ? credentials.email
+            : "";
 
+        const password =
+          typeof credentials?.password === "string"
+            ? credentials.password
+            : "";
+
+        // Admin login
         if (
-          email !== process.env.ADMIN_EMAIL ||
-          password !== process.env.ADMIN_PASSWORD
+          email === process.env.ADMIN_EMAIL &&
+          password === process.env.ADMIN_PASSWORD
         ) {
-          return null;
+          return {
+            id: "admin",
+            email: process.env.ADMIN_EMAIL,
+            name: "FineX Admin",
+          };
         }
 
-        return {
-          id: "admin",
-          email: process.env.ADMIN_EMAIL,
-          name: "FineX Admin",
-        };
+        // Client login
+        if (
+          email === process.env.CLIENT_EMAIL &&
+          password === process.env.CLIENT_PASSWORD
+        ) {
+          return {
+            id: "client-test",
+            email: process.env.CLIENT_EMAIL,
+            name: "Test Client",
+          };
+        }
+
+        return null;
       },
     }),
   ],
